@@ -237,9 +237,10 @@ else:
         'score': score}
 
 print(result_dict['score'])
+print(result_dict['error (mHa)'])
 
 #print(n_el)
-#print(n_mo)
+print(n_mo)
 #print(n_so)
 #print(n_q)
 #print(e_nn)
