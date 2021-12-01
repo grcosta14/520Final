@@ -17,8 +17,8 @@ from qiskit.transpiler.passes import Unroller
 
 
 ###Part 1
-molecule = "H .0 .0 .0; H .0 .0 0.739"
-#molecule = "Li .0 .0 .0; H .0 .0 1.5474"
+#molecule = "H .0 .0 .0; H .0 .0 0.739"
+molecule = "Li .0 .0 .0; H .0 .0 1.5474"
 driver = PySCFDriver(atom=molecule)
 qmolecule = driver.run()
 
