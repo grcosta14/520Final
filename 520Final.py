@@ -15,6 +15,9 @@ from IPython.display import display, clear_output
 from qiskit.transpiler import PassManager
 from qiskit.transpiler.passes import Unroller
 from qiskit_nature.transformers import FreezeCoreTransformer
+import matplotlib.pyplot as plt
+import pandas as pd
+import os.path
 
 
 ###Part 1
@@ -241,6 +244,36 @@ else:
 
 print(result_dict['score'])
 print(result_dict['error (mHa)'])
+
+###Graph
+fig, ax = plt.subplots(1, 1)
+ax.set_xlabel('Iterations')
+ax.set_ylabel('Energy')
+ax.grid()
+fig.text(0.7, 0.75, f'Energy: {result.optimal_value:.3f}\nScore: {score:.0f}')
+plt.title(f"{result_dict['optimizer']}-{result_dict['mapping']}\n{result_dict['ansatz']}")
+ax.plot(counts, values)
+ax.axhline(exact_energy, linestyle='--')
+fig_title = f"\
+{result_dict['optimizer']}-\
+{result_dict['mapping']}-\
+{result_dict['ansatz']}-\
+Energy({result_dict['energy (Ha)']:.3f})-\
+Score({result_dict['score']:.0f})\
+.png"
+fig.savefig(fig_title, dpi=300)
+
+###Display
+filename = 'results_h2.csv'
+if os.path.isfile(filename):
+    result_df = pd.read_csv(filename)
+    result_df = result_df.append([result_dict])
+else:
+    result_df = pd.DataFrame.from_dict([result_dict])
+result_df.to_csv(filename)
+result_df[['optimizer','ansatz', '# of qubits', '# of parameters','rotation blocks', 'entanglement_blocks',
+    'entanglement', 'repetitions', 'error (mHa)', 'pass', 'score']]
+
 
 #print(n_el)
 print(n_mo)
