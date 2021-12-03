@@ -14,6 +14,7 @@ from qiskit.algorithms import VQE
 from IPython.display import display, clear_output
 from qiskit.transpiler import PassManager
 from qiskit.transpiler.passes import Unroller
+from qiskit_nature.transformers import FreezeCoreTransformer
 
 
 ###Part 1
@@ -30,7 +31,8 @@ n_q = 2* qmolecule.num_molecular_orbitals
 e_nn = qmolecule.nuclear_repulsion_energy
 
 ###Part 2
-problem = ElectronicStructureProblem(driver)
+problem = ElectronicStructureProblem(driver,transformers = [FreezeCoreTransformer(freeze_core = True, remove_orbitals = [3,4])])
+#problem = ElectronicStructureProblem(driver)
 
 # Generate the second-quantized operators
 second_q_ops = problem.second_q_ops()
@@ -40,7 +42,7 @@ main_op = second_q_ops[0]
 
 ###Part 3
 # Setup the mapper and qubit converter
-mapper_type = 'JordanWignerMapper'
+mapper_type = 'ParityMapper'
 
 if mapper_type == 'ParityMapper':
     mapper = ParityMapper()
@@ -49,7 +51,7 @@ elif mapper_type == 'JordanWignerMapper':
 elif mapper_type == 'BravyiKitaevMapper':
     mapper = BravyiKitaevMapper()
 
-converter = QubitConverter(mapper=mapper, two_qubit_reduction=False)
+converter = QubitConverter(mapper=mapper, two_qubit_reduction=True)
 
 # The fermionic operators are mapped to qubit operators
 num_particles = (problem.molecule_data_transformed.num_alpha,
@@ -62,6 +64,7 @@ num_particles = (problem.molecule_data_transformed.num_alpha,
 num_spin_orbitals = 2 * problem.molecule_data_transformed.num_molecular_orbitals
 init_state = HartreeFock(num_spin_orbitals, num_particles, converter)
 print(init_state)
+print(problem.molecule_data_transformed.num_molecular_orbitals)
 
 ###Part 5
 # Choose the ansatz
@@ -79,11 +82,11 @@ if ansatz_type == "TwoLocal":
     # Entangling gates
     entanglement_blocks = 'cx'
     # How the qubits are entangled 
-    entanglement = 'full'
+    entanglement = 'linear'
     # Repetitions of rotation_blocks + entanglement_blocks with independent parameters
-    repetitions = 3
+    repetitions = 1
     # Skip the final rotation_blocks layer
-    skip_final_rotation_layer = True
+    skip_final_rotation_layer = False
     ansatz = TwoLocal(qubit_op.num_qubits, rotation_blocks, entanglement_blocks, reps=repetitions, 
                       entanglement=entanglement, skip_final_rotation_layer=skip_final_rotation_layer)
     # Add the initial state
@@ -121,18 +124,18 @@ print(ansatz)
 backend = Aer.get_backend('statevector_simulator')
 
 ###Part 7
-optimizer_type = 'COBYLA'
+optimizer_type = 'SLSQP'
 
 # You may want to tune the parameters 
 # of each optimizer, here the defaults are used
 if optimizer_type == 'COBYLA':
-    optimizer = COBYLA(maxiter=500)
+    optimizer = COBYLA(maxiter=1000)
 elif optimizer_type == 'L_BFGS_B':
-    optimizer = L_BFGS_B(maxfun=500)
+    optimizer = L_BFGS_B(maxfun=1000)
 elif optimizer_type == 'SPSA':
-    optimizer = SPSA(maxiter=500)
+    optimizer = SPSA(maxiter=1000)
 elif optimizer_type == 'SLSQP':
-    optimizer = SLSQP(maxiter=500)
+    optimizer = SLSQP(maxiter=1000)
 
 ###Part 8
 def exact_diagonalizer(problem, converter):
