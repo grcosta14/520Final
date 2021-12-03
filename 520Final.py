@@ -54,7 +54,7 @@ elif mapper_type == 'JordanWignerMapper':
 elif mapper_type == 'BravyiKitaevMapper':
     mapper = BravyiKitaevMapper()
 
-converter = QubitConverter(mapper=mapper, two_qubit_reduction=True)
+converter = QubitConverter(mapper=mapper, two_qubit_reduction=True, z2symmetry_reduction = [1,1])
 
 # The fermionic operators are mapped to qubit operators
 num_particles = (problem.molecule_data_transformed.num_alpha,
@@ -67,7 +67,7 @@ num_particles = (problem.molecule_data_transformed.num_alpha,
 num_spin_orbitals = 2 * problem.molecule_data_transformed.num_molecular_orbitals
 init_state = HartreeFock(num_spin_orbitals, num_particles, converter)
 print(init_state)
-print(problem.molecule_data_transformed.num_molecular_orbitals)
+#print(problem.molecule_data_transformed.num_molecular_orbitals)
 
 ###Part 5
 # Choose the ansatz

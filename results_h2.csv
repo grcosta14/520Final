@@ -1,7 +1,13 @@
-,Unnamed: 0,optimizer,mapping,ansatz,rotation blocks,entanglement_blocks,entanglement,repetitions,skip_final_rotation_layer,energy (Ha),error (mHa),pass,# of parameters,final parameters,# of evaluations,optimizer time,# of qubits,# of CNOTs,score
-0,0.0,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
+,Unnamed: 0,Unnamed: 0.1,Unnamed: 0.1.1,optimizer,mapping,ansatz,rotation blocks,entanglement_blocks,entanglement,repetitions,skip_final_rotation_layer,energy (Ha),error (mHa),pass,# of parameters,final parameters,# of evaluations,optimizer time,# of qubits,# of CNOTs,score
+0,0.0,0.0,0.0,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
  -0.07022063  0.00409813  0.05228247  3.13188526  3.18867535  0.44246286
  -0.04588111 -0.04486811 -0.05015003 -0.09609021]",,3.085549116134644,4,3,3
-0,,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
+1,1.0,0.0,,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
  -0.07022063  0.00409813  0.05228247  3.13188526  3.18867535  0.44246286
  -0.04588111 -0.04486811 -0.05015003 -0.09609021]",,3.1597108840942383,4,3,3
+2,0.0,,,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
+ -0.07022063  0.00409813  0.05228247  3.13188526  3.18867535  0.44246286
+ -0.04588111 -0.04486811 -0.05015003 -0.09609021]",,3.820784091949463,4,3,3
+0,,,,SLSQP,ParityMapper,TwoLocal,"['ry', 'rz']",cx,linear,1,False,-1.0863472014249569,2.35881430978635,True,16,"[ 0.25215484 -0.00542578 -3.14151554 -2.6983063  -0.0451892   0.02861294
+ -0.07022063  0.00409813  0.05228247  3.13188526  3.18867535  0.44246286
+ -0.04588111 -0.04486811 -0.05015003 -0.09609021]",,3.005105972290039,4,3,3
